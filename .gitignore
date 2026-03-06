@@ -1,0 +1,84 @@
+# Dependencies
+node_modules/
+.npm
+.pnpm-store
+.yarn-integrity
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+.angular/
+.cache/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+*.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Git
+.git/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.classpath
+.settings/
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+ENV/
+
+# System-specific files
+Thumbs.db
+db.snap
+.DS_Store
+
+# Project specific
+uploads/
+temp/
+tmp/
+brain/
+.gemini/

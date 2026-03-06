@@ -1,0 +1,403 @@
+.preview-page {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.loading {
+    text-align: center;
+    padding: 64px;
+    color: #64748b;
+
+    i {
+        font-size: 32px;
+        display: block;
+        margin-bottom: 12px;
+    }
+}
+
+// ── Header ──────────────────────────────────────────────────
+.page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+    }
+}
+
+.back-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+
+    &:hover {
+        border-color: #818cf8;
+        color: #6366f1;
+    }
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.bank-badge {
+    padding: 3px 10px;
+    background: #ede9fe;
+    color: #6d28d9;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.txn-count {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.source-badge {
+    padding: 3px 8px;
+    background: #dbeafe;
+    color: #2563eb;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    &.ocr {
+        background: #fef3c7;
+        color: #d97706;
+    }
+}
+
+// ── Export Bar ───────────────────────────────────────────────
+.export-bar {
+    display: flex;
+    gap: 10px;
+}
+
+.export-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &.csv {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    &.json {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    &.xml {
+        background: #fce7f3;
+        color: #db2777;
+    }
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+// ── Account Info ────────────────────────────────────────────
+.account-info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #0f172a;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        i {
+            color: #818cf8;
+        }
+    }
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.add-txn-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: #4f46e5;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.info-item {
+    &.invalid {
+        .value {
+            color: #e11d48;
+        }
+    }
+
+    .label {
+        display: block;
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .value {
+        display: block;
+        font-size: 15px;
+        color: #1e293b;
+        font-weight: 600;
+        margin-top: 2px;
+    }
+}
+
+// ── Table ───────────────────────────────────────────────────
+.table-container {
+    background: #fff;
+    border-radius: 16px;
+    overflow-x: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+
+    th,
+    td {
+        padding: 12px 16px;
+        text-align: left;
+        font-size: 13px;
+    }
+
+    th {
+        background: #f8fafc;
+        color: #475569;
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid #e2e8f0;
+        position: sticky;
+        top: 0;
+    }
+
+    td {
+        border-bottom: 1px solid #f1f5f9;
+        color: #334155;
+    }
+
+    tbody tr {
+        transition: background 0.15s;
+
+        &:hover {
+            background: #f8fafc;
+        }
+
+        &.editing {
+            background: #faf5ff;
+        }
+    }
+}
+
+.row-num {
+    color: #94a3b8;
+    font-size: 12px;
+    width: 40px;
+}
+
+.desc {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.amount {
+    text-align: right !important;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+
+    &.debit {
+        color: #dc2626;
+    }
+
+    &.credit {
+        color: #16a34a;
+    }
+
+    &.balance {
+        color: #16a34a; // Default to green (valid)
+        font-weight: 600;
+
+        &.invalid {
+            color: #dc2626; // Red for incorrect math
+        }
+
+        &.valid {
+            color: #16a34a;
+        }
+    }
+}
+
+// ── Edit inputs ─────────────────────────────────────────────
+.edit-input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #c4b5fd;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    background: #fff;
+    box-sizing: border-box;
+
+    &:focus {
+        border-color: #818cf8;
+        box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.15);
+    }
+
+    &.wide {
+        min-width: 200px;
+    }
+
+    &.amount {
+        text-align: right;
+        width: 100px;
+    }
+}
+
+// ── Action buttons ──────────────────────────────────────────
+.actions {
+    display: flex;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s;
+
+    &.edit {
+        background: #ede9fe;
+        color: #6d28d9;
+    }
+
+    &.edit:hover {
+        background: #ddd6fe;
+    }
+
+    &.save {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    &.save:hover {
+        background: #bbf7d0;
+    }
+
+    &.cancel {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    &.cancel:hover {
+        background: #fecaca;
+    }
+
+    &.delete {
+        background: #fff1f2;
+        color: #e11d48;
+    }
+
+    &.delete:hover {
+        background: #ffe4e6;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}

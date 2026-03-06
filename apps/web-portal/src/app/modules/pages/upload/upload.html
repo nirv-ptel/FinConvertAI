@@ -1,0 +1,95 @@
+<div class="upload-page">
+    <div class="page-header">
+        <h1>Upload Bank Statement</h1>
+        <p class="subtitle">Upload a PDF bank statement (SBI, HDFC, ICICI) to extract and convert data</p>
+    </div>
+
+    <!-- Drop Zone -->
+    <div class="drop-zone" [class.drag-over]="dragOver()" [class.has-file]="selectedFile()"
+        (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+        @if (!selectedFile()) {
+        <div class="drop-content">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <h3>Drag & drop your PDF here</h3>
+            <p>or click to browse files</p>
+            <input type="file" accept=".pdf" (change)="onFileSelect($event)" id="fileInput" hidden />
+            <label for="fileInput" class="browse-btn">Browse Files</label>
+            <span class="file-hint">PDF only • Max 50MB • SBI, HDFC, ICICI supported</span>
+        </div>
+        } @else {
+        <div class="file-preview">
+            <div class="file-info">
+                <i class="fa-solid fa-file-pdf"></i>
+                <div class="file-details">
+                    <span class="file-name">{{ selectedFile()!.name }}</span>
+                    <span class="file-size">{{ formatSize(selectedFile()!.size) }}</span>
+                </div>
+                <button class="remove-btn" (click)="removeFile()" [disabled]="uploading()">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+        }
+    </div>
+
+    <!-- Bank Selection & Password -->
+    @if (selectedFile()) {
+    <div class="input-section">
+        <div class="field">
+            <label for="bankSelect">
+                <i class="fa-solid fa-building-columns"></i>
+                Select Your Bank
+            </label>
+            <select id="bankSelect" [ngModel]="selectedBank()" (ngModelChange)="selectedBank.set($event)"
+                [disabled]="uploading()">
+                <option value="" disabled selected>Choose your bank...</option>
+                @for (bank of banks; track bank.id) {
+                <option [value]="bank.id">{{ bank.name }}</option>
+                }
+            </select>
+        </div>
+
+        <div class="field">
+            <label for="pdfPassword">
+                <i class="fa-solid fa-lock"></i>
+                PDF Password <span class="optional">(if encrypted)</span>
+            </label>
+            <input type="password" id="pdfPassword" placeholder="Enter PDF password..." [ngModel]="password()"
+                (ngModelChange)="password.set($event)" [disabled]="uploading()" />
+        </div>
+    </div>
+    }
+
+    <!-- Progress Bar -->
+    @if (uploading()) {
+    <div class="progress-section">
+        <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="uploadProgress()"></div>
+        </div>
+        <span class="progress-text">{{ uploadProgress() < 100 ? 'Uploading...' : 'Processing...' }} {{ uploadProgress()
+                }}%</span>
+    </div>
+    }
+
+    <!-- Messages -->
+    @if (error()) {
+    <div class="message error-msg">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        {{ error() }}
+    </div>
+    }
+    @if (success()) {
+    <div class="message success-msg">
+        <i class="fa-solid fa-circle-check"></i>
+        {{ success() }}
+    </div>
+    }
+
+    <!-- Upload Button -->
+    @if (selectedFile() && !uploading()) {
+    <button class="upload-btn" (click)="upload()">
+        <i class="fa-solid fa-rocket"></i>
+        Upload & Process
+    </button>
+    }
+</div>

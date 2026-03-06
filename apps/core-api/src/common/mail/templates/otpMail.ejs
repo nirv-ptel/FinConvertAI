@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="supported-color-schemes" content="light dark" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <title>Email Verification</title>
+    <style type="text/css">
+        :root {
+            color-scheme: light dark;
+            supported-color-schemes: light dark;
+        }
+
+        .email-body > p {
+            display: none;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .email-title {
+                font-size: 32px !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .header-links { color: #ffffff !important; }
+            .mail-text-white { color: #ffffff !important; }
+            .mail-text-always-white { color: #ffffff !important; }
+            .mail-text-always-black { color: #000000 !important; }
+            .mail-bg-offdark { background-color: #181818 !important; }
+        }
+    </style>
+</head>
+
+<body style="margin: 0" class="email-body">
+    <table style="max-width: 600px; width: 100%; margin: 0 auto; border-spacing: 0px; font-family: Arial, Helvetica, 'Times New Roman', sans-serif; line-height: 1.6; padding: 20px 0;">
+        <tbody>
+            <tr style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+                <td style="line-height: normal; padding: 30px 20px;">
+                    <span style="font-size: 24px; font-weight: bold; color: #ffffff; letter-spacing: 2px;">REPOTICS</span>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 30px 20px;">
+                    <p class="mail-text-white" style="margin: 0; font-size: 16px;">Dear <strong><%= name %></strong>,</p>
+                    <p class="mail-text-white" style="font-size: 20px; font-weight: bold;">Verify Your Email Address</p>
+                    <p class="mail-text-white" style="margin: 0; font-size: 15px;">
+                        Thank you for registering with Repotics! Please use the OTP below to verify your email address.
+                        This OTP is valid for <strong>10 minutes</strong>.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 20px;">
+                    <div style="background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); border-radius: 12px; padding: 30px; text-align: center;">
+                        <p style="margin: 0; color: #a0aec0; font-size: 14px; letter-spacing: 1px; text-transform: uppercase;">Your Verification Code</p>
+                        <p style="margin: 15px 0 0 0; font-size: 48px; font-weight: bold; color: #ffffff; letter-spacing: 12px;"><%= otp %></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px;">
+                    <p class="mail-text-white" style="margin: 0; font-size: 14px; color: #e53e3e;">
+                        ⚠️ Do not share this OTP with anyone. It expires in 10 minutes.
+                    </p>
+                    <p class="mail-text-white" style="margin: 10px 0 0 0; font-size: 14px;">
+                        If you did not create an account, please ignore this email.
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 10px 20px;">
+                    <p class="mail-text-white" style="margin: 0; font-size: 14px;">Best regards,</p>
+                    <p class="mail-text-white" style="margin: 0; font-size: 14px;"><strong>Repotics Team</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding: 20px; text-align: center; border-top: 1px dotted #b4b4b4;">
+                    <p style="color: #808080; font-size: 10px; margin: 0;">
+                        <a href="https://repotics.com/privacy-policies/" target="_blank" class="header-links" style="text-decoration: underline; color: #808080;">Privacy Policy</a>
+                        <span style="color: #808080;">  |  </span>
+                        <a href="https://repotics.com/terms-and-conditions/" target="_blank" class="header-links" style="text-decoration: underline; color: #808080;">Terms and Conditions</a>
+                        <span style="color: #808080;">  |  </span>
+                        <a href="https://repotics.com/contact/" target="_blank" class="header-links" style="text-decoration: underline; color: #808080;">Contact</a>
+                        <br />
+                        <span style="color: #808080;">&copy; 2025 - All Rights Reserved.</span>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

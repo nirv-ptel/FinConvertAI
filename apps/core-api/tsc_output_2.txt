@@ -1,0 +1,14 @@
+src/common/auth/guards/accesstoken.guard.spec.ts(5,12): error TS2554: Expected 1 arguments, but got 0.
+src/common/auth/guards/role-modules/role-modules.guard.spec.ts(5,12): error TS2554: Expected 1 arguments, but got 0.
+src/common/auth/guards/role-permission/role.permission.guard.spec.ts(7,12): error TS2554: Expected 1 arguments, but got 0.
+src/common/auth/guards/setting/setting.guard.spec.ts(5,12): error TS2554: Expected 1 arguments, but got 0.
+src/common/helper/services/upload.service.spec.ts(2,10): error TS2305: Module '"./upload.service"' has no exported member 'S3Service'.
+src/common/request/guards/identification.guard.spec.ts(5,12): error TS2554: Expected 1 arguments, but got 0.
+src/common/request/pipes/files.validation.pipe.ts(19,46): error TS2702: 'Multer' only refers to a type, but is being used as a namespace here.
+src/common/request/pipes/files.validation.pipe.ts(39,36): error TS2702: 'Multer' only refers to a type, but is being used as a namespace here.
+src/common/request/pipes/files.validation.pipe.ts(39,55): error TS2702: 'Multer' only refers to a type, but is being used as a namespace here.
+src/common/request/pipes/files.validation.pipe.ts(66,20): error TS2702: 'Multer' only refers to a type, but is being used as a namespace here.
+src/common/request/pipes/files.validation.pipe.ts(66,34): error TS2702: 'Multer' only refers to a type, but is being used as a namespace here.
+src/common/response/interceptors/response.interceptor.spec.ts(5,12): error TS2554: Expected 1 arguments, but got 0.
+test/app.e2e-spec.ts(19,12): error TS2349: This expression is not callable.
+  Type '{ default: SuperTestStatic; Test: typeof Test; agent: typeof TestAgent & ((app?: App, options?: AgentOptions) => TestAgent<Test>); }' has no call signatures.

@@ -1,0 +1,158 @@
+<div class="preview-page">
+    @if (loading()) {
+    <div class="loading">
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        <span>Loading conversion data...</span>
+    </div>
+    } @else if (conversion()) {
+    <!-- Header -->
+    <div class="page-header">
+        <div class="header-left">
+            <a routerLink="/conversions" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div>
+                <h1>{{ conversion().fileName }}</h1>
+                <div class="meta">
+                    <span class="bank-badge">{{ conversion().bank }}</span>
+                    <span class="txn-count">{{ transactions().length }} transactions</span>
+                    <span class="source-badge" [class.ocr]="conversion().source === 'ocr'">
+                        {{ conversion().source === 'ocr' ? 'OCR' : 'Text' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="export-bar">
+            <button class="export-btn csv" (click)="exportAs('csv')" [disabled]="exporting()">
+                <i class="fa-solid fa-file-csv"></i>
+                {{ exporting() === 'csv' ? 'Exporting...' : 'CSV' }}
+            </button>
+            <button class="export-btn json" (click)="exportAs('json')" [disabled]="exporting()">
+                <i class="fa-solid fa-file-code"></i>
+                {{ exporting() === 'json' ? 'Exporting...' : 'JSON' }}
+            </button>
+            <button class="export-btn xml" (click)="exportAs('tally-xml')" [disabled]="exporting()">
+                <i class="fa-solid fa-file-lines"></i>
+                {{ exporting() === 'tally-xml' ? 'Exporting...' : 'Tally XML' }}
+            </button>
+        </div>
+    </div>
+
+    <!-- Account Info -->
+    @if (accountInfo() && (accountInfo().account_number || accountInfo().account_holder)) {
+    <div class="account-info-card">
+        <div class="card-header">
+            <h3><i class="fa-solid fa-university"></i> Account Information</h3>
+            <button class="add-txn-btn" (click)="addNewRow()">
+                <i class="fa-solid fa-plus"></i> Add Transaction
+            </button>
+        </div>
+        <div class="info-grid">
+            @if (accountInfo().account_holder) {
+            <div class="info-item">
+                <span class="label">Account Holder</span>
+                <span class="value">{{ accountInfo().account_holder }}</span>
+            </div>
+            }
+            @if (accountInfo().account_number) {
+            <div class="info-item">
+                <span class="label">Account Number</span>
+                <span class="value">{{ accountInfo().account_number }}</span>
+            </div>
+            }
+            @if (accountInfo().branch) {
+            <div class="info-item">
+                <span class="label">Branch</span>
+                <span class="value">{{ accountInfo().branch }}</span>
+            </div>
+            }
+            @if (accountInfo().period_from) {
+            <div class="info-item">
+                <span class="label">Period</span>
+                <span class="value">{{ accountInfo().period_from }} — {{ accountInfo().period_to }}</span>
+            </div>
+            }
+            @if (accountInfo().opening_balance !== undefined && accountInfo().opening_balance !== null) {
+            <div class="info-item">
+                <span class="label">Opening Balance</span>
+                <span class="value">{{ accountInfo().opening_balance | number: '1.2-2' }}</span>
+            </div>
+            }
+            @if (accountInfo().closing_balance !== undefined && accountInfo().closing_balance !== null) {
+            <div class="info-item" [class.invalid]="!isClosingBalanceValid()">
+                <span class="label">Closing Balance</span>
+                <span class="value">{{ accountInfo().closing_balance | number: '1.2-2' }}</span>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Transactions Table -->
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Particulars</th>
+                    <th>Chq./Ref.No.</th>
+                    <th class="amount">Withdrawal</th>
+                    <th class="amount">Deposit</th>
+                    <th class="amount">Balance</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (txn of transactions(); track $index) {
+                <tr [class.editing]="editingIndex() === $index">
+                    <td class="row-num">{{ $index + 1 }}</td>
+
+                    @if (editingIndex() === $index) {
+                    <!-- Editing Mode -->
+                    <td><input [(ngModel)]="editingTxn()!.date" class="edit-input" /></td>
+                    <td><input [(ngModel)]="editingTxn()!['Particulars']" class="edit-input wide" /></td>
+                    <td><input [(ngModel)]="editingTxn()!['Chq./Ref.No.']" class="edit-input" /></td>
+                    <td><input [(ngModel)]="editingTxn()!['Withdrawal']" type="number" class="edit-input amount" /></td>
+                    <td><input [(ngModel)]="editingTxn()!['Deposit']" type="number" class="edit-input amount" /></td>
+                    <td class="amount balance invalid">
+                        {{ editingTxn()!.Balance | number: '1.2-2' }}
+                    </td>
+                    <td class="actions">
+                        <button class="action-btn save" (click)="saveEdit()" [disabled]="saving()">
+                            <i class="fa-solid" [class.fa-check]="!saving()" [class.fa-spinner]="saving()"
+                                [class.fa-spin]="saving()"></i>
+                        </button>
+                        <button class="action-btn cancel" (click)="cancelEdit()">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </td>
+                    } @else {
+                    <!-- View Mode -->
+                    <td>{{ txn.date }}</td>
+                    <td class="desc">{{ txn['Particulars'] }}</td>
+                    <td>{{ txn['Chq./Ref.No.'] }}</td>
+                    <td class="amount debit">{{ txn['Withdrawal'] | number: '1.2-2' }}</td>
+                    <td class="amount credit">{{ txn['Deposit'] | number: '1.2-2' }}</td>
+                    <td class="amount balance" [class.invalid]="!isBalanceValid($index)"
+                        [class.valid]="isBalanceValid($index)">
+                        {{ txn['Balance'] | number: '1.2-2' }}
+                    </td>
+                    <td class="actions">
+                        <button class="action-btn edit" (click)="startEdit($index)">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button class="action-btn delete" (click)="deleteRow($index)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+</div>

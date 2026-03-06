@@ -1,0 +1,59 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1>Dashboard</h1>
+        <p class="subtitle">Overview of your bank statement processing</p>
+    </div>
+
+    <div class="stats-grid">
+        <!-- Total Uploads -->
+        <div class="stat-card uploads">
+            <div class="stat-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ stats().totalUploads }}</span>
+                <span class="stat-label">Total Uploads</span>
+            </div>
+        </div>
+
+        <!-- Total Conversions -->
+        <div class="stat-card conversions">
+            <div class="stat-icon"><i class="fa-solid fa-file-export"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ stats().totalConversions }}</span>
+                <span class="stat-label">Total Conversions</span>
+            </div>
+        </div>
+
+        <!-- Success Rate -->
+        <div class="stat-card success">
+            <div class="stat-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ stats().successRate.toFixed(2) }}%</span>
+                <span class="stat-label">Success Rate</span>
+            </div>
+        </div>
+
+        <!-- Failed -->
+        <div class="stat-card failed">
+            <div class="stat-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+            <div class="stat-content">
+                <span class="stat-value">{{ stats().failedConversions }}</span>
+                <span class="stat-label">Failed</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="actions-grid">
+            <a routerLink="/upload" class="action-card">
+                <i class="fa-solid fa-plus"></i>
+                <span>Upload New Statement</span>
+            </a>
+            <a routerLink="/conversions" class="action-card">
+                <i class="fa-solid fa-list"></i>
+                <span>View All Conversions</span>
+            </a>
+        </div>
+    </div>
+</div>

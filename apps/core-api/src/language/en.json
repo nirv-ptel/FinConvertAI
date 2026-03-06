@@ -1,0 +1,118 @@
+{
+    "401": {
+        "message": "unauthorised access",
+        "httpCode": 401
+    },
+    "403": {
+        "message": "you don't have permission to perform this action",
+        "httpCode": 403
+    },
+    "1001": {
+        "message": "Something went wrong on server",
+        "httpCode": 400
+    },
+    "1003": {
+        "message": "Your have reached to number of device which was allowed in your package. to add more please contact sds team",
+        "httpCode": 400
+    },
+    "1004": {
+        "message": "Please subscribe to package to add device",
+        "httpCode": 400
+    },
+    "2001":{
+        "message": "name is required",
+        "httpCode": 400
+    },
+    "2002":{
+        "message": "email is required",
+        "httpCode": 400
+    },
+    "2003":{
+        "message": "email is invalid",
+        "httpCode": 400
+    },
+    "2004":{
+        "message": "password is required",
+        "httpCode": 400
+    },
+    "2005":{
+        "message": "password should be greater than 6 and less than 20",
+        "httpCode": 400
+    },
+    "2006":{
+        "message": "address is required",
+        "httpCode": 400
+    },
+    "2007":{
+        "message": "select role",
+        "httpCode": 400
+    },
+    "2008":{
+        "message": "email is already exist",
+        "httpCode": 400
+    },
+    "2009":{
+        "message": "role is invalid",
+        "httpCode": 400
+    },
+    "2010":{
+        "message": "Invalid username or password",
+        "httpCode": 400
+    },
+    "2501": {
+        "message": "user created",
+        "httpCode": 200
+    },
+    "2502": {
+        "message": "user get success",
+        "httpCode": 200
+    },
+    "2503": {
+        "message": "updated successfully",
+        "httpCode": 200
+    },
+    "2504": {
+        "message": "removed successfully",
+        "httpCode": 200
+    },
+    "2506": {
+        "message": "reset link has been sent on your mail. link will be expired in 15 min",
+        "httpCode": 200
+    },
+    "2507": {
+        "message": "password changed please try by login",
+        "httpCode": 200
+    },
+    "3001": {
+        "message": "Role name is required",
+        "httpCode": 400
+    },
+    "3002": {
+        "message": "Atleast 1 access right needs to be defined",
+        "httpCode": 400
+    },
+    "3003": {
+        "message": "Invalid access right defined",
+        "httpCode": 400
+    },
+    "3004": {
+        "message": "Sorry you can not use system reserved name Super Admin or Admin",
+        "httpCode": 400
+    },
+    "3501": {
+        "message": "role added",
+        "httpCode": 200
+    },
+    "3502": {
+        "message": "role updated",
+        "httpCode": 200
+    },
+    "3503": {
+        "message": "role removed",
+        "httpCode": 200
+    },
+    "5004":{
+        "message": "This MAC already added with other device",
+        "httpCode": 400
+    }
+}

@@ -1,0 +1,230 @@
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 72px;
+$sidebar-bg: #0f172a;
+$sidebar-hover: #1e293b;
+$sidebar-active: linear-gradient(135deg, #6366f1, #8b5cf6);
+$content-bg: #f1f5f9;
+$text-primary: #e2e8f0;
+$text-secondary: #94a3b8;
+$accent: #818cf8;
+$transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+.layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+// ── Sidebar ─────────────────────────────────────────────────
+.sidebar {
+  width: $sidebar-width;
+  background: $sidebar-bg;
+  display: flex;
+  flex-direction: column;
+  transition: width $transition;
+  overflow: hidden;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: $accent;
+  font-size: 20px;
+  font-weight: 700;
+
+  i {
+    font-size: 24px;
+    color: #a78bfa;
+  }
+}
+
+.logo-text {
+  white-space: nowrap;
+  transition: opacity $transition;
+}
+
+.toggle-btn {
+  background: none;
+  border: none;
+  color: $text-secondary;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: all $transition;
+
+  &:hover {
+    background: $sidebar-hover;
+    color: $text-primary;
+  }
+}
+
+// ── Navigation ──────────────────────────────────────────────
+.sidebar-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: $text-secondary;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all $transition;
+  white-space: nowrap;
+
+  i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: $sidebar-hover;
+    color: $text-primary;
+  }
+
+  &.active {
+    background: $sidebar-active;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  }
+}
+
+.nav-text {
+  transition: opacity $transition;
+}
+
+// ── Footer ──────────────────────────────────────────────────
+.sidebar-footer {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  margin-bottom: 8px;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6366f1, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.user-name {
+  color: $text-primary;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  color: $text-secondary;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #f87171;
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all $transition;
+
+  i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background: rgba(248, 113, 113, 0.1);
+  }
+}
+
+// ── Collapsed State ─────────────────────────────────────────
+.sidebar-collapsed {
+  .sidebar {
+    width: $sidebar-collapsed-width;
+  }
+
+  .logo-text,
+  .nav-text,
+  .user-details,
+  .toggle-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .sidebar-header {
+    justify-content: center;
+  }
+
+  .nav-item,
+  .logout-btn {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .user-info {
+    justify-content: center;
+    padding: 8px;
+  }
+}
+
+// ── Main Content ────────────────────────────────────────────
+.main-content {
+  flex: 1;
+  background: $content-bg;
+  overflow-y: auto;
+  padding: 32px;
+}

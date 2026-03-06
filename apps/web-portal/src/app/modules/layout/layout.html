@@ -1,0 +1,53 @@
+<!-- Layout: Sidebar + Content -->
+<div class="layout-container" [class.sidebar-collapsed]="sidebarCollapsed()">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="fa-solid fa-bolt-lightning"></i>
+        <span class="logo-text">FinConvert AI</span>
+      </div>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <i class="fa-solid" [class.fa-angles-left]="!sidebarCollapsed()"
+          [class.fa-angles-right]="sidebarCollapsed()"></i>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-chart-line"></i>
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a routerLink="/upload" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <span class="nav-text">Upload</span>
+      </a>
+      <a routerLink="/conversions" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-file-export"></i>
+        <span class="nav-text">Conversions</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="user-details">
+          <span class="user-name">{{ userName }}</span>
+          <span class="user-email">{{ userEmail }}</span>
+        </div>
+      </div>
+      <button class="logout-btn" (click)="signOut()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span class="nav-text">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>
