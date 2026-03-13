@@ -81,6 +81,27 @@ export class AuthService {
         return this._httpClient.post(`${this._baseUrl}/auth/signup`, user);
     }
 
+    verifyOtp(email: string, otp: string): Observable<unknown> {
+        return this._httpClient.post<any>(`${this._baseUrl}/auth/verify-otp`, { email, otp }).pipe(
+            switchMap((response) => {
+                const token = response.data?.token;
+                const tenantId = response.data?.tenantId;
+                if (!token) return throwError(() => 'Invalid response from server');
+
+                this.accessToken = token;
+                if (tenantId) {
+                    this.tenantId = tenantId;
+                }
+                this._authenticated.set(true);
+                return of(response);
+            })
+        );
+    }
+
+    resendOtp(email: string): Observable<unknown> {
+        return this._httpClient.post(`${this._baseUrl}/auth/resend-otp`, { email });
+    }
+
     check(): Observable<boolean> {
         if (this._authenticated()) {
             return of(true);

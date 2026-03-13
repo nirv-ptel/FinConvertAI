@@ -84,8 +84,8 @@ export class AuthController {
 
     @ApiCreatedResponse({ description: 'success' })
     @Response('OTP sent to your email. Please verify to complete registration.', HttpStatus.OK)
-    @Post('singup')
-    async singup(@Body() body: CreateUserDto): Promise<IResponse> {
+    @Post('signup')
+    async signup(@Body() body: CreateUserDto): Promise<IResponse> {
 
         return Promise.resolve()
             .then(() => {
@@ -253,7 +253,7 @@ export class AuthController {
                 return this._authService.createAccessToken(tokenInfo);
             })
             .then((token: string) => {
-                return { data: { token } };
+                return { data: { token, tenantId: otpDoc.tenantId } };
             });
     }
 

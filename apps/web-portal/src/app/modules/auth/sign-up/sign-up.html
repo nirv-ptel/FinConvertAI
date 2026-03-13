@@ -1,1 +1,127 @@
-<p>sign-up works!</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <!-- Logo -->
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </div>
+            <span class="logo-text">FinConvert AI</span>
+        </div>
+
+        @if (step === 'signup') {
+        <!-- Signup Header -->
+        <div class="header">
+            <h1>Create your account</h1>
+            <p>Start converting your bank statements today.</p>
+        </div>
+
+        <form [formGroup]="signupForm" class="auth-form" (ngSubmit)="submitSignup()">
+            <div class="form-group">
+                <label>Full Name</label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="name" placeholder="John Doe">
+                    @if (signupForm.get('name')?.hasError('required')) {
+                    <mat-error>Name is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="email" placeholder="john@example.com">
+                    @if (signupForm.get('email')?.hasError('email')) {
+                    <mat-error>Please enter a valid email</mat-error>
+                    }
+                    @if (signupForm.get('email')?.hasError('required')) {
+                    <mat-error>Email is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="mobile" placeholder="+91 99999 00000">
+                    @if (signupForm.get('mobile')?.hasError('required')) {
+                    <mat-error>Mobile is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="password" type="password" placeholder="••••••••">
+                    @if (signupForm.get('password')?.hasError('minlength')) {
+                    <mat-error>Password must be at least 6 characters</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            @if (errorMessage) {
+            <div class="error-alert">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ errorMessage }}</span>
+            </div>
+            }
+
+            <button mat-flat-button color="primary" class="submit-btn" [disabled]="loading || signupForm.invalid">
+                @if (!loading) {
+                <span>Create Account</span>
+                }
+                @if (loading) {
+                <mat-spinner diameter="20"></mat-spinner>
+                }
+            </button>
+
+            <div class="footer-link">
+                Already have an account? <a routerLink="/sign-in">Sign in</a>
+            </div>
+        </form>
+        } @else {
+        <!-- OTP Header -->
+        <div class="header">
+            <h1>Verify your email</h1>
+            <p>We've sent a 6-digit code to <strong>{{ signupForm.get('email')?.value }}</strong></p>
+        </div>
+
+        <form [formGroup]="otpForm" class="auth-form" (ngSubmit)="verifyOtp()">
+            <div class="form-group">
+                <label>Enter Code</label>
+                <mat-form-field appearance="outline" class="w-full">
+                    <input matInput formControlName="otp" placeholder="123456" maxlength="6">
+                    @if (otpForm.get('otp')?.hasError('required')) {
+                    <mat-error>OTP is required</mat-error>
+                    }
+                </mat-form-field>
+            </div>
+
+            @if (errorMessage) {
+            <div class="error-alert">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ errorMessage }}</span>
+            </div>
+            }
+
+            <button mat-flat-button color="primary" class="submit-btn" [disabled]="loading || otpForm.invalid">
+                @if (!loading) {
+                <span>Verify & Proceed</span>
+                }
+                @if (loading) {
+                <mat-spinner diameter="20"></mat-spinner>
+                }
+            </button>
+
+            <div class="footer-link">
+                Didn't receive the code? <button type="button" class="link-btn" (click)="resendOtp()">Resend
+                    OTP</button>
+            </div>
+
+            <button type="button" class="back-link" (click)="step = 'signup'">
+                <i class="fa-solid fa-arrow-left"></i> Back to details
+            </button>
+        </form>
+        }
+    </div>
+</div>

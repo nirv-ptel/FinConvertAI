@@ -1,4 +1,5 @@
 import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +13,8 @@ import { AuthService } from 'app/core/auth';
 
 @Component({
     selector: 'app-sign-in',
-    imports: [RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
+    standalone: true,
+    imports: [CommonModule, RouterLink, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatButtonModule, MatIconModule, MatProgressSpinnerModule],
     templateUrl: './sign-in.html',
     styleUrl: './sign-in.scss',
 })
@@ -32,6 +34,7 @@ export class SignIn {
     };
     signInForm!: UntypedFormGroup;
     showAlert: boolean = false;
+    showPassword = false;
 
     /**
   * On init
@@ -65,10 +68,10 @@ export class SignIn {
                 const redirectURL = this._activatedRoute.snapshot.queryParamMap.get('redirectURL') ?? '/signed-in-redirect';
                 this._router.navigateByUrl(redirectURL);
             },
-            error: () => {
+            error: (err) => {
                 this.signInForm.enable();
                 this.signInNgForm.resetForm();
-                this.alert = { type: 'error', message: 'Wrong email or password' };
+                this.alert = { type: 'error', message: err.error?.message || err.error?.error || 'Wrong email or password' };
                 this.showAlert = true;
             },
         });
